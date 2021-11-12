@@ -1,5 +1,48 @@
 <?php
+include 'connect.php';
+$sanga = True;
+ if($sanga = False){
 
+if(isset($_POST['submit'])){
+
+	var_dump($_POST);
+
+
+	$name = $_POST['name'];
+	$hobby1 = $_POST['hobby1'];
+  $hobby2 = $_POST['hobby2'];
+  $hobby3 = $_POST['hobby3'];
+  $hobby4 = $_POST['hobby4'];
+  $sex =$_POST['sex'];
+
+  $dish = $_POST['dish'];
+
+  $dish1 = $dish[0];
+  $dish2 = $dish[1];
+  $dish3 = $dish[2];
+  $dish4 = $dish[3];
+
+  $insert = "INSERT INTO `infinity` (`name`, `hobby1`, `hobby2`, `hobby3`, `hobby4`, `sex`, `dish1`, `dish2`, `dish3`, `dish4`) VALUES ('$name', '$hobby1', '$hobby2', '$hobby3', '$hobby4', '$sex', '$dish1', '$dish2', '$dish3', '$dish4')";
+
+
+$sql_query = mysqli_query($conn, $insert);
+
+if ($sql_query == true){
+  $success = "Data submitted";
+  echo $success;
+  
+}else{
+  $failure = mysqli_error($conn);
+ echo $failure;
+  
+
+
+}
+	
+
+	}
+
+}
  ?>
 <!DOCTYPE html>
 <html>
@@ -28,7 +71,7 @@
 							<div class="form-area"> 
 								<h1>Entry Form</h1>
 
-								<form method="post" action="infinity.php" >
+								<form method="post" action="infinityDiscuss.php" >
 									
 									<label>Full Name: </label>
 									<input type="text" name="name">
@@ -59,7 +102,7 @@
 										
 									<label>Action</label>			
 									<input type="reset" name="" value="Clear Fields">
-									<input type="submit" name="ubmit" value=" Submit Your Data">
+									<input type="submit" name="submit" value=" Submit Your Data">
 
 							</form>
 						
@@ -75,8 +118,28 @@
 // echo "hello";
 
 
- // if(isset($_POST['submit'])){
- // 	var_dump($_POST);
+
+
+ if(isset($_POST['submit'])){
+ 	//var_dump($_POST);
+
+
+
+ // // 	echo $_POST['name'];
+
+ 	foreach ($_POST as $key => $value) {
+ 		echo $key." = ".$value."<br>";
+ }
+
+ foreach ($_POST['dish'] as $dish) {
+ 	echo $dish."<br>";
+ 			// code...
+ 	}
+ 	// code...
+ }
+
+ // echo count($_POST);
+//}
 
  // 	$hobby1 = array_key_exists("hobby1",$_POST) == TRUE?  $_POST['hobby1'] : "hello";
 
@@ -104,31 +167,39 @@
 	//	}
 
 			//indexed array
-$infinty = array("sanga", "ruth", "Ssegawa", 2, 1.5 );
+// $infinty = array("sanga", "ruth", "Ssegawa", 2, 1.5 );
+// $part1 = array(1, 2.0, "Ssegawa", False);
+// //echo $part1[2];
+// //var_dump($part1);
+// foreach ($part1 as $part12) {
+// 	echo $part12."<br>";
+// 	// code...
+// }
 //var_dump($infinty);
 //extract($infinty)
-echo "<br>";
-echo $infinty[1].$infinty[0];
+// echo "<br>";
+// echo $infinty[1].$infinty[0];
 
-$len = count($infinty); //count() ruturns the number of items on the array
-echo $len;
+// $len = count($infinty); //count() ruturns the number of items on the array
+// echo $len;
 
-//loop through
-foreach ($infinty as $part ) {
-	echo $part."<br>";
-	// code...
-}
+// //loop through
+// foreach ($infinty as $part ) {
+// 	echo $part."<br>";
+// 	// code...
+// }
 
-		//Associative Arrays
-	$age = array("sanga"=>"21", "ruth"=>"22", "ssegawa"=>"23", "chris"=>19);
-	var_dump($age);
+// 		//Associative Arrays
+//  	$age = array("sanga"=>"21", "ruth"=>"25", "ssegawa"=>"23", "chris"=>19);
+//  	//echo $age["ruth"];
+// // 	var_dump($age);
 
-	foreach ($age as $key => $value) {
-		echo $key. " = ".$value."<br>";
-		extract($age);
-		echo $sanga;
-		// code...
-	}
+// 	foreach ($age as $key => $value) {
+// 		echo $key. " = ".$value."<br>";
+// 		// extract($age);
+// 		// echo $sanga;
+// 		// code...
+// 	}
   
 
 ?>
